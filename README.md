@@ -1,7 +1,7 @@
-## Team Name: team062-Ruckus
-## Project Name: Wave Match
+# Team Name: team062-Ruckus
+# Project Name: Wave Match
 
-# Project Summary:
+## Project Summary:
 
 Based on personal experiences when listening to music and trying to get new matches, the current automated recommendations that we get need to allow us to specify what attributes we want recommended music to have based on. We would like to change that by creating Wave Match, which is an application that will be used to enhance a user’s listening experience. Ideally, we would have multiple input sources, such as a single song, list of songs, link to a playlist, or sign-in with their Spotify account to access user data. Based on the input type, Wave Match will generate songs in the form of a list that matches the attributes of the songs in the current playlist. The list of generated songs can be narrowed based on attributes that we record in our database. Although there are many recommendation applications available, our project aims to narrow down the musical attributes of the songs that the user listens to, allowing for a better understanding of their preferences and recommendations.
 The information being stored in the database would be tracked from Spotify where each track would have the following attributes: Track_id, artists, album_name, track_name, popularity, duration_ms, explicit, danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo, time_signature, and track_genre. The starting database we are using is a dataset sourced from https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset. This is a large existing dataset of many songs which were sourced from the Spotify API. If we need information on additional songs not included in that dataset, these API calls can give us the attributes found in the dataset. (https://developer.spotify.com/documentation/web-api/reference/get-audio-features
