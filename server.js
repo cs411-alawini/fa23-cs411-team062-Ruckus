@@ -247,7 +247,7 @@ app.get('/search', async(req, res) => {
     // console.log(tracks[0]);
 
     searchKeyword = "";
-    res.render('search', { likedSongs: tracks, matchedTracks: [], keyword: "", cssm: cssm});
+    res.render('search', { likedSongs: tracks, matchedTracks: [], keyword: searchKeyword, cssm: cssm});
   }
   catch(error) {
     console.error(error);
