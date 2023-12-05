@@ -8,22 +8,21 @@
 </head>
 <body>
   <div class="container mt-4">
-    <div class="card">
-      <div class="card-body">
-        <h1>Welcome to Our Site</h1>
-        <p>Click below to navigate:</p>
-        <% if (!user) { %>
-            <a href="/login" class="btn btn-primary">Login</a>
-          <% } %>
-        <% if (!user) { %>
-            <a href="/signup" class="btn btn-success">Signup</a>
-        <% } %>
-        
-        <% if (user) { %>
-          <a href="/profile" class="btn btn-info">Profile</a>
-        <% } %>
-      </div>
+    <div class="card text-center">
+        <div class="card-body">
+            <h1 class="card-title">Welcome to WaveMatch</h1>
+            <p class="card-text">Click below to navigate:</p>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <% if (!user) { %>
+                    <a href="/login" class="btn btn-primary">Login</a>
+                    <a href="/signup" class="btn btn-success">Signup</a>
+                <% } %>
+                <% if (user) { %>
+                    <a href="/profile" class="btn btn-info">Profile</a>
+                <% } %>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
 </body>
 </html>
