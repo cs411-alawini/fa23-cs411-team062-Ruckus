@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Keyword Search And Match</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        width: 50%;
+        text-align: center;
+    }
+    
+    td {
+        width: 50%;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="">WaveMatch</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/profile">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/liked-songs">Liked Songs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/playlists">Playlist</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/search">Search</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-body">
+        <!-- Search and Match bar -->
+        <table class="table table-hover" id="sandm table">
+            <thead>
+                <tr>
+                    <th scope="col"><h2>Search</h2></th>
+                    <th scope="col"><h2>Match</h2></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <form action="/search" method="POST">
+                            <label for="textField">Enter Keyword:</label>
+                            <input type="text" id="textField" name="textField" />
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/generic_match" method="POST">
+                            <button type="submit" class="btn btn-primary" style="text-align:center">Generic Match</button>
+                        </form>
+                        <form action="/custom_match" method="POST">
+                            <label>
+                                <% if (cssm.tempo == "true") { %>
+                                        <input type="checkbox" id="tempo" name="tempo" checked /> Tempo
+                                <% } else { %>
+                                        <input type="checkbox" id="tempo" name="tempo" /> Tempo
+                                <% } %>
+                        </label>
+                        <label>
+                                <% if (cssm.valence == "true") { %>
+                                        <input type="checkbox" id="valence" name="valence" checked /> Valence
+                                <% } else { %>
+                                        <input type="checkbox" id="valence" name="valence" /> Valence
+                                <% } %>
+                        </label>
+                        <label>
+                                <% if (cssm.liveness == "true") { %>
+                                        <input type="checkbox" id="liveness" name="liveness" checked /> Liveness
+                                <% } else { %>
+                                        <input type="checkbox" id="liveness" name="liveness" /> Liveness
+                                <% } %>
+                        </label>
+                        <label>
+                                <% if (cssm.instrumentalness == "true") { %>
+                                        <input type="checkbox" id="instrumentalness" name="instrumentalness" checked /> Instrumentalness
+                                <% } else { %>
+                                        <input type="checkbox" id="instrumentalness" name="instrumentalness" /> Instrumentalness
+                                <% } %>
+                        </label>
+                        <label>
+                                <% if (cssm.acousticness == "true") { %>
+                                        <input type="checkbox" id="acousticness" name="acousticness" checked /> Acousticness
+                                <% } else { %>
+                                        <input type="checkbox" id="acousticness" name="acousticness" /> Acousticness
+                                <% } %>
+                        </label>
+                        <label>
+                                <% if (cssm.speechiness == "true") { %>
+                                        <input type="checkbox" id="speechiness" name="speechiness" checked /> Speechiness
+                                <% } else { %>
+                                        <input type="checkbox" id="speechiness" name="speechiness" /> Speechiness
+                                <% } %>
+                        </label>
+                        <label>
+                                <% if (cssm.mode == "true") { %>
+                                        <input type="checkbox" id="mode" name="mode" checked /> Mode
+                                <% } else { %>
+                                        <input type="checkbox" id="mode" name="mode" /> Mode
+                                <% } %>
+                        </label>
+                        <label>
+                                <% if (cssm.musickey == "true") { %>
+                                        <input type="checkbox" id="musickey" name="musickey" checked /> MusicKey
+                                <% } else { %>
+                                        <input type="checkbox" id="musickey" name="musickey" /> MusicKey
+                                <% } %>
+                        </label>
+                        <label>
+                                <% if (cssm.energy == "true") { %>
+                                        <input type="checkbox" id="energy" name="energy" checked /> Energy
+                                <% } else { %>
+                                        <input type="checkbox" id="energy" name="energy" /> Energy
+                                <% } %>
+                        </label>
+                        <label>
+                                <% if (cssm.danceability == "true") { %>
+                                        <input type="checkbox" id="danceability" name="danceability" checked /> Danceability
+                                <% } else { %>
+                                        <input type="checkbox" id="danceability" name="danceability" /> Danceability
+                                <% } %>
+                        </label>
+                        <label>
+                                <% if (cssm.duration == "true") { %>
+                                        <input type="checkbox" id="duration" name="duration" checked /> Duration
+                                <% } else { %>
+                                        <input type="checkbox" id="duration" name="duration" /> Duration
+                                <% } %>
+                        </label>
+                        <label>
+                                <% if (cssm.popularity == "true") { %>
+                                        <input type="checkbox" id="popularity" name="popularity" checked /> Popularity
+                                <% } else { %>
+                                        <input type="checkbox" id="popularity" name="popularity" /> Popularity
+                                <% } %>
+                        </label>
+                            <br>
+                            <label>
+                                Tolerance: <input type="number" id="tolerance" name="tolerance" value=<%= cssm.tolerance %>
+                            </label>
+                            <br>
+                            <button type="submit" class="btn btn-primary" style="text-align:center">Custom Match</button>
+                            
+                            <script>
+                                const tempo = document.getElementById("tempo");
+                                tempo.checked = cssm.tempo;
+
+                            </script>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- End of search and match bar -->
+        <!-- Start of keyword search results -->
+        <h2>Songs containing keyword: "<%= keyword %>"</h2>
+        <button id="refreshButton" class="btn btn-primary">Refresh Data</button>
+        <% if (likedSongs.length> 0) { %>
+          <div style="overflow-x: auto;">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Track Name</th>
+                  <th scope="col">Album Name</th>
+                  <th scope="col">Tempo</th>
+                  <th scope="col">Valence</th>
+                  <th scope="col">Liveness</th>
+                  <th scope="col">Instrumentalness</th>
+                  <th scope="col">Acousticness</th>
+                  <th scope="col">Speechiness</th>
+                  <th scope="col">Mode</th>
+                  <th scope="col">Key</th>
+                  <th scope="col">Energy</th>
+                  <th scope="col">Danceability</th>
+                  <th scope="col">Duration (ms)</th>
+                  <th scope="col">Popularity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% likedSongs.forEach(song=> { %>
+                  <tr>
+                    <td>
+                      <%= song.Track_name %>
+                    </td>
+                    <td>
+                      <%= song.Album_name %>
+                    </td>
+                    <td>
+                      <%= song.Tempo %>
+                    </td>
+                    <td>
+                      <%= song.Valence %>
+                    </td>
+                    <td>
+                      <%= song.Liveness %>
+                    </td>
+                    <td>
+                      <%= song.Instrumentalness %>
+                    </td>
+                    <td>
+                      <%= song.Acousticness %>
+                    </td>
+                    <td>
+                      <%= song.Speechiness %>
+                    </td>
+                    <td>
+                      <%= song.Mode %>
+                    </td>
+                    <td>
+                      <%= song.MusicKey %>
+                    </td>
+                    <td>
+                      <%= song.Energy %>
+                    </td>
+                    <td>
+                      <%= song.Danceability %>
+                    </td>
+                    <td>
+                      <%= song.Duration_ms %>
+                    </td>
+                    <td>
+                      <%= song.Popularity %>
+                    </td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+            </div>
+        <% } else { %>
+            <p class="text-center">No songs in the database match your keyword search.</p>
+        <% } %>
+        <br><br>
+        <% if (matchedTracks.length> 0) { %>
+            <h2>Songs that match your match query.</h2>
+            <div style="overflow-x: auto;">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Track Name</th>
+                    <th scope="col">Album Name</th>
+                    <th scope="col">Tempo</th>
+                    <th scope="col">Valence</th>
+                    <th scope="col">Liveness</th>
+                    <th scope="col">Instrumentalness</th>
+                    <th scope="col">Acousticness</th>
+                    <th scope="col">Speechiness</th>
+                    <th scope="col">Mode</th>
+                    <th scope="col">Key</th>
+                    <th scope="col">Energy</th>
+                    <th scope="col">Danceability</th>
+                    <th scope="col">Duration (ms)</th>
+                    <th scope="col">Popularity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% matchedTracks.forEach(song=> { %>
+                    <tr>
+                      <td>
+                        <%= song.Track_name %>
+                      </td>
+                      <td>
+                        <%= song.Album_name %>
+                      </td>
+                      <td>
+                        <%= song.Tempo %>
+                      </td>
+                      <td>
+                        <%= song.Valence %>
+                      </td>
+                      <td>
+                        <%= song.Liveness %>
+                      </td>
+                      <td>
+                        <%= song.Instrumentalness %>
+                      </td>
+                      <td>
+                        <%= song.Acousticness %>
+                      </td>
+                      <td>
+                        <%= song.Speechiness %>
+                      </td>
+                      <td>
+                        <%= song.Mode %>
+                      </td>
+                      <td>
+                        <%= song.MusicKey %>
+                      </td>
+                      <td>
+                        <%= song.Energy %>
+                      </td>
+                      <td>
+                        <%= song.Danceability %>
+                      </td>
+                      <td>
+                        <%= song.Duration_ms %>
+                      </td>
+                      <td>
+                        <%= song.Popularity %>
+                      </td>
+                  </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+              </div>
+              <% } else { %>
+              <p class="text-center">No match query has been run or no songs match your query.</p>
+              <% } %>
+        </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('refreshButton').addEventListener('click', function () {
+      window.location.href = '/refresh';
+    });
+  </script>
+</body>
+
+</html>

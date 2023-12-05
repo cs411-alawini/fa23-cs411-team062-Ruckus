@@ -1,0 +1,25 @@
+<%- include('layout', { title: 'Profile', content: `
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <h1 class="mb-3">Welcome, ${user.Name}!</h1>
+        <p><strong>Email:</strong> ${user.Email}</p>
+        ${spotifyProfile ? `
+          <div class="mt-4">
+            <h2>Spotify Profile</h2>
+            <p><strong>Display Name:</strong> ${spotifyProfile.DisplayName}</p>
+            <p><strong>Profile URL:</strong> <a href="${spotifyProfile.ProfileUrl}">${spotifyProfile.ProfileUrl}</a></p>
+            ${spotifyProfile.ImageUrl ? `<img src="${spotifyProfile.ImageUrl}" alt="Profile Image" class="img-fluid rounded mb-3">` : ''}
+            <button id="redirectButton" class="btn btn-danger">Unlink Spotify</button>
+          </div>
+        ` : '<p>You have not linked your Spotify account yet. <a href="/spotify">Click here to link</a>.</p>'}
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    document.getElementById('redirectButton').addEventListener('click', function() {
+      window.location.href = '/removeAccount';
+    });
+  </script>
+` }) %>
