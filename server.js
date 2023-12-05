@@ -238,15 +238,14 @@ app.get('/search', async(req, res) => {
     const tracksQuery = `
       SELECT *
       FROM Track t
-      JOIN UserLikes ul
-        ON ul.TrackID = t.TrackID
-      WHERE ul.UserID = ?;
+      WHERE 
+        LOWER(t.Track_name) LIKE LOWER(?)
+        OR LOWER(t.Album_name) LIKE LOWER(?);
     `;
-    const [tracks] = await connection.promise().execute(tracksQuery, [req.session.user]);
+    const [tracks] = await connection.promise().execute(tracksQuery, ['%' + searchKeyword + '%', '%' + searchKeyword + '%'], [req.session.user]);
     // console.log(tracks.length);
     // console.log(tracks[0]);
 
-    searchKeyword = "";
     res.render('search', { likedSongs: tracks, matchedTracks: [], keyword: searchKeyword, cssm: cssm});
   }
   catch(error) {
