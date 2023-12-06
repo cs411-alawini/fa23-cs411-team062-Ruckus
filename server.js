@@ -466,6 +466,26 @@ app.post('/custom_match', async(req, res) => {
   }
 });
 
+app.get('/storedProcedure', (req, res) => {
+  const sql = 'CALL GetHighestRatedTracks()';
+
+  connection.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error executing stored procedure:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    var data = []
+    for (let i = 0; i < results.length - 1; i++) {
+      data.push(results[i][0].Result);
+    }
+
+    const dat = data; // Assuming the result is in the first element of the array
+
+    res.render('storedProcedure', { likedSongs: dat });
+  });
+});
+
 app.get('/refresh', async (req, res) => {
   if (!req.session || !req.session.user) {
     return res.redirect('/login');
