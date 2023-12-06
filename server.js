@@ -285,8 +285,27 @@ app.post('/generic_match', async(req, res) => {
       FROM Track t
       WHERE 
         LOWER(t.Track_name) LIKE LOWER(?)
-        OR LOWER(t.Album_name) LIKE LOWER(?)
-      LIMIT 1;
+        OR LOWER(t.Album_name) LIKE LOWER(?);
+    `;
+
+    const avgQuery = `
+      SELECT
+        AVG(Tempo) AS Tempo,
+        AVG(Valence) AS Valence,
+        AVG(Liveness) AS Liveness,
+        AVG(Instrumentalness) AS Instrumentalness,
+        AVG(Acousticness) AS Acousticness,
+        AVG(Speechiness) AS Speechiness,
+        AVG(Mode) AS Mode,
+        AVG(MusicKey) AS MusicKey,
+        AVG(Energy) AS Energy,
+        AVG(Danceability) AS Danceability,
+        AVG(Duration_ms) AS Duration_ms,
+        AVG(Popularity) AS Popularity
+      FROM Track t
+      WHERE 
+        LOWER(t.Track_name) LIKE LOWER(?)
+        OR LOWER(t.Album_name) LIKE LOWER(?);
     `;
 
     const matchQuery = `
@@ -307,7 +326,8 @@ app.post('/generic_match', async(req, res) => {
         AND (Popularity >= ? AND Popularity <= ?);
     `;
     const [searchedTracks] = await connection.promise().execute(searchQuery, ['%' + searchKeyword + '%', '%' + searchKeyword + '%'], [req.session.user]);
-    let track = searchedTracks[0];
+    const [tracks] = (await connection.promise().execute(avgQuery, ['%' + searchKeyword + '%', '%' + searchKeyword + '%'], [req.session.user]));
+    let track = tracks[0];
     const matchArgs =
         [
           track.Tempo * 0.9, track.Tempo * 1.1,
@@ -354,7 +374,27 @@ app.post('/custom_match', async(req, res) => {
       FROM Track t
       WHERE 
         LOWER(t.Track_name) LIKE LOWER(?)
-        OR LOWER(t.Album_name) LIKE LOWER(?)
+        OR LOWER(t.Album_name) LIKE LOWER(?);
+    `;
+
+    const avgQuery = `
+      SELECT
+        AVG(Tempo) AS Tempo,
+        AVG(Valence) AS Valence,
+        AVG(Liveness) AS Liveness,
+        AVG(Instrumentalness) AS Instrumentalness,
+        AVG(Acousticness) AS Acousticness,
+        AVG(Speechiness) AS Speechiness,
+        AVG(Mode) AS Mode,
+        AVG(MusicKey) AS MusicKey,
+        AVG(Energy) AS Energy,
+        AVG(Danceability) AS Danceability,
+        AVG(Duration_ms) AS Duration_ms,
+        AVG(Popularity) AS Popularity
+      FROM Track t
+      WHERE 
+        LOWER(t.Track_name) LIKE LOWER(?)
+        OR LOWER(t.Album_name) LIKE LOWER(?);
     `;
 
     const matchQuery = `
@@ -375,7 +415,8 @@ app.post('/custom_match', async(req, res) => {
         AND (Popularity >= ? AND Popularity <= ?);
     `;
     const [searchedTracks] = await connection.promise().execute(searchQuery, ['%' + searchKeyword + '%', '%' + searchKeyword + '%'], [req.session.user]);
-    let track = searchedTracks[0];
+    const [tracks] = (await connection.promise().execute(avgQuery, ['%' + searchKeyword + '%', '%' + searchKeyword + '%'], [req.session.user]));
+    let track = tracks[0];
     const matchArgs =
         [
           typeof tempo == "undefined" ? 0 : track.Tempo * (1 - tolerance / 100), 
